@@ -1,0 +1,156 @@
+\def\issolution{1}
+
+\ifdefined\issolution
+    \documentclass[10pt,english,solution]{exam-uoc}
+\else
+    \documentclass[10pt,english]{exam-uoc}
+\fi
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\setserie{1}
+
+\lectureheader{G. Arampatzis}{}{Probability Theory}{Spring 2025}
+
+\header{June Exam}{06.06.2025}
+
+\begin{question}{Coins}
+%
+In a box there are $n+1$ coins.
+Coin $i$ shows heads with probability $\frac{i}{n}, \, i=0,\ldots,n$.
+You choose a coin at random and flip it. 
+
+\begin{solution}
+%
+Let $A_i$ be the event of choosing coin $i$ and $K$ be the event of getting heads.
+It is given that $\Prob(K \,|\, A_i)=\frac{i}{n}$ and $\Prob(A_i) = \frac{1}{n+1}$.
+%
+\end{solution}
+
+
+\begin{subquestion}[10]
+%
+Show that the probability of getting heads is $\frac{1}{2}$.
+%
+\end{subquestion}
+
+\begin{solution}
+%
+Since the events $A_i$ are disjoint and their union gives us the sample space, by the law
+of total probability we have,
+%
+%
+\begin{equation}
+    \Prob(K) = \sum_{i=0}^n \Prob(K \,|\, A_i) \Prob(A_i) = 
+    \sum_{i=0}^n \frac{i}{n} \frac{1}{n+1} =
+    \frac{1}{n(n+1)} \frac{n(n+1)}{2} = \frac{1}{2} \,.
+\end{equation}
+%
+%
+\end{solution}
+
+\begin{subquestion}[10]
+%
+Given that heads came up, calculate the probability that you chose coin $i$.
+%
+\end{subquestion}
+
+\begin{solution}
+%
+By Bayes' theorem,
+%
+\begin{equation}
+    \Prob( A_i \,|\, K) 
+    =
+    \frac{\Prob(K \,|\, A_i) \, \Prob( A_i ) }{\Prob( K )}
+    =
+    \frac{\frac{i}{n} \, \frac{1}{n+1}}{\frac{1}{2}}
+    =
+    \frac{2i}{n(n+1)} \,.
+\end{equation}
+%
+
+%
+\end{solution}
+
+\end{question}
+
+
+\begin{question}[20]{Uniform Distribution}
+%
+Let $X_1, X_2, X_3$ be independent random variables that follow the uniform 
+distribution on the interval $[0, 1]$. The probability density function of the uniform 
+distribution equals 1 for values of $X$ in $[0, 1]$ and 0 elsewhere.
+Calculate the probability that the largest of the three is smaller than the 
+sum of the other two.
+
+\begin{solution}
+%
+The event whose probability we want to calculate can be written as,
+%
+\begin{equation}
+\begin{split}
+    A 
+    &= \left\{ X_1 < X_2 + X_3\,,\; X_1 > X_2\,,\; X_1>X_3 \right\} \cup 
+    \\
+    & \quad\, \left\{ X_2 < X_1 + X_3\,,\; X_2 > X_1\,,\; X_2 > X_3 \right\} \cup 
+    \\
+    & \quad\, \left\{ X_3 < X_1 + X_2\,,\; X_3 > X_1\,,\; X_3 > X_2 \right\} \\
+    &=
+    A_1 \cup A_2 \cup A_3 \,.
+\end{split}
+\end{equation}
+%
+Since the sets are disjoint, we have
+%
+\begin{equation}
+    \Prob(A) = 
+    \Prob(A_1) + \Prob(A_2) + \Prob(A_3) =
+     3\Prob(A_1)\,,
+\end{equation}
+%
+where the last equality holds due to the symmetry of the problem.
+We will calculate the probability of event $A_1$.
+
+For each of the random variables, we have that the largest of all, $X_1$ here, can
+belong anywhere in $[0,1]$.  
+$X_2$ is certainly smaller than $X_1$ and greater than 0, so it belongs to the 
+interval $[0, X_1]$. 
+For $X_3$ we have that $X_3 > X_1 - X_2$ and $X_3<X_1$, so it belongs to the interval 
+$[X_1 - X_2, X_1]$.
+Therefore, 
+%
+%
+\begin{equation}
+    \Prob(X_1 < X_2 + X_3)
+    = \int_0^1 \int_0^{x_1} \int_{x_1 - x_2}^{x_1} 1 \dif x_3 \dif x_2 \dif x_1
+    = \ldots = \frac{1}{6} \,.
+\end{equation}
+%
+Therefore, $\Prob(A) = \frac{1}{2}$.
+%
+\end{solution}
+
+\end{question}
+
+
+\newpage\thispagestyle{empty}
+
+\begin{information}
+    \begin{itemize}
+        \item A total of \gettotalpoints{} points are given. The maximum score is 40.
+        \item The duration of the exam is 150 minutes.
+        \item Justify your answers clearly. Answers without justification
+              are not considered correct.
+        \item Solve the problems on draft paper and present the final solutions 
+              neatly written. Answers with scribbles will not be graded.
+        \item Give consolidated answers for each exercise. 
+              If you proceed to the next without having completed the previous one, 
+              leave sufficient blank space in case you want to return.
+    \end{itemize}
+\end{information}
+
+
+\end{document} 
